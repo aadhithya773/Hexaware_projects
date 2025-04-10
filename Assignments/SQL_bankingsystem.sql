@@ -73,7 +73,7 @@ FROM
 JOIN 
     accounts a ON c.customer_id = a.customer_id;
 
---2.
+--2.Write a SQL query to list all transaction corresponding customer. 
 SELECT 
     c.customer_id,
     CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
@@ -88,21 +88,21 @@ JOIN
 JOIN 
     transactions t ON a.account_id = t.account_id
 
---3.
+--3.Write a SQL query to increase the balance of a specific account by a certain amount. 
 update accounts
 set balance+=500
 where account_id=104;
 select *from accounts;
 
---4.
+--4.Write a SQL query to Combine first and last names of customers as a full_name. 
 select 
    concat(first_name,' ',last_name)as full_name
    from customers;
---5.
+--5.Write a SQL query to remove accounts with a balance of zero where the account type is savings. 
 delete from accounts
 where balance=0 and acc_type='savings';
 
---6.
+--6.Write a SQL query to Find customers living in a specific city. 
 alter table customers
 add city varchar(100);
 UPDATE customers SET city = 'Chennai' WHERE customer_id = 1;
@@ -135,20 +135,20 @@ END;*/
 select *from customers
 where city='chennai';
 
---7.
+--7.Write a SQL query to Get the account balance for a specific account. 
 select account_id,balance
 from accounts
 where
-    account_id = 101;  -- Replace with your specific account ID
---8.
+    account_id = 102;  
+--8.Write a SQL query to List all current accounts with a balance greater than $1,000.
 select *
 from accounts
 where acc_type = 'Current' and balance > 1000;
 
---9.
+--9.Write a SQL query to Retrieve all transactions for a specific account. 
 select *
 from transactions
-where account_id = 101;  -- Replace with your specific account ID
+where account_id = 101;  
 
 SELECT 
     c.customer_id,
@@ -164,7 +164,8 @@ JOIN
 GROUP BY 
     c.customer_id, c.first_name, c.last_name;
 
---10.
+--10.Write a SQL query to Calculate the interest accrued on savings accounts based on a 
+given interest rate. 
 select 
 account_id,
 customer_id,
@@ -173,7 +174,7 @@ balance * 0.05 as interest_accrued
 from accounts
 where acc_type = 'savings';
 
---11.
+--11. Write a SQL query to Identify accounts where the balance is less than a specified overdraft limit. 
 select 
     account_id,
     customer_id,
@@ -184,7 +185,7 @@ from
 where 
     balance < 500;
 
---12.
+--12.Write a SQL query to Find customers not living in a specific city. 
 select 
     customer_id,
     first_name,
