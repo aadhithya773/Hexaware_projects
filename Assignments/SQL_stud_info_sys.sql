@@ -104,7 +104,7 @@ select*from courses;
 select*from enrollments;
 select*from payments ;
 --Task 2 select ,where,between and like:-----------
---1.
+--1.insert a new student data
 insert into students (first_name, last_name, date_of_birth, email, phone_number)
 values ('john', 'doe', '1995-08-15', 'john.doe@example.com', '1234567890');
 
@@ -127,11 +127,11 @@ where course_id=5;
 --6.delete specific student and enroll
 delete from enrollments
 where student_id=3;
------this cant be done because Before deleting a student, you must delete all dependent records in child tables — like enrollments and payments.
+-----this cant be done because Before deleting a student, you must delete all dependent records in child tables â€” like enrollments and payments.
 delete from students
 where student_id=3;
 
---7.
+--7. updating payments
 update payments
 set amount = 5500.00
 where payment_id = 3;
