@@ -210,10 +210,9 @@ select distinct a.artist_name
 FROM Artists a
 join Artworks aw on a.ArtistID = aw.ArtistID
 where aw.Category_id = (
-    select Category_id
-    from Artworks
-    where Title = 'Mona Lisa'
-);
+select Category_id
+from Artworks
+where Title = 'Mona Lisa');
 
 --20. List the names of artists and the number of artworks they have in the gallery
 select a.artist_name, count(aw.ArtworkID)as total_count
