@@ -46,6 +46,8 @@ create table customer (
     foreign key (booking_id) references booking(booking_id)
 );
 
+--# Task 2
+--1.inserting values into the table
 insert into venue (venue_name, address) values
 ('Grand Hall', '123 Main St'),
 ('Sky Arena', '456 Park Ave'),
@@ -93,3 +95,92 @@ insert into customer (customer_name, email, phone_number, booking_id) values
 ('Hannah White', 'hannah@example.com', '8901234567', 8),
 ('Ian Black', 'ian@example.com', '9012345678', 9),
 ('Jenny Blue', 'jenny@example.com', '0123456789', 10);
+
+--2.sql query to list all events
+select *
+from event e
+left join venue v on e.venue_id = v.venue_id
+left join booking b on e.booking_id = b.booking_id;
+
+--3.sql query to select events with available tickets
+select * 
+from event
+where available_seats > 0;
+
+--4.
+select * 
+from event 
+where event_name like '%cup%';
+
+--5.
+select * 
+from event 
+where ticket_price between 1000 and 2500;
+
+--6. Events with dates in a specific range 
+select*
+from event
+where event_date between '2025-05-01' and '2025-05-31';
+
+--7. Events with available tickets and "Concert" in name
+select * 
+from event 
+where available_seats > 0 and event_name like '%Concert%';
+
+--8.
+select * 
+from customer
+order by customer_id
+offset 5 rows fetch next 5 rows only;
+
+--9.
+select * 
+from booking 
+where num_tickets > 4;
+
+--10.
+select * 
+from customer 
+where phone_number like '%000';
+
+--11.
+select * 
+from event 
+where total_seats > 15000
+order by total_seats desc;
+
+--12.
+select * 
+from event 
+where event_name not like 'x%' 
+  and event_name not like 'y%' 
+  and event_name not like 'z%';
+
+
+--#Task 3
+--1.
+select 
+e.event_name,
+e.event_type,
+avg(e.ticket_price) as avg_ticket_price
+from event e
+group by e.event_name,e.event_type;
+
+--2.
+select e.event_name, sum(b.total_cost) as revenue
+from event e
+join booking b on e.event_id=b.event_id
+group by e.event_name;
+
+--3.
+SELECT TOP 1 
+    e.event_name,
+    SUM(b.num_tickets) AS total_tickets_sold
+FROM 
+    event e
+JOIN 
+    booking b ON e.event_id = b.event_id
+GROUP BY 
+    e.event_name
+ORDER BY 
+    total_tickets_sold DESC;
